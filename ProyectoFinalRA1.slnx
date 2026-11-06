@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="ProyectoFinal.API/ProyectoFinal.API.csproj" Id="1f83ee5c-b440-4f2a-93e3-8be753b4ba90" />
+  <Project Path="ProyectoFinal.Domain/ProyectoFinal.Domain.csproj" />
+  <Project Path="ProyectoFinal.Persistence/ProyectoFinal.Persistence.csproj" Id="b994c8e5-034f-4c9a-8577-b877cbb4ae69" />
+</Solution>
