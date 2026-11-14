@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.GenAI" Version="2.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="11.0.0" />
+    <PackageReference Include="ModelContextProtocol" Version="2.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ProyectoFinal.Domain\ProyectoFinal.Domain.csproj" />
+    <ProjectReference Include="..\ProyectoFinal.MCP.Server\ProyectoFinal.MCP.Server.csproj" />
+    <ProjectReference Include="..\ProyectoFinal.Persistence\ProyectoFinal.Persistence.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<None Update="appsettings.json">
+	 <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</None>	  
+  </ItemGroup>
+
+</Project>

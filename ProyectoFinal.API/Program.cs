@@ -13,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
-        // Le decimos a .NET que si recibe un Vehiculo abstracto, por defecto cree un Coche
+        // Le decimos a .NET que si recibe un Vehiculo abstracto, por defecto cree un Coche 
         options.JsonSerializerOptions.Converters.Add(new VehiculoJsonConverter());
         //options.JsonSerializerOptions.Converters.Add(new ProyectoFinal.API.Converters.VehiculoJsonConverter());
     });
