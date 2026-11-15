@@ -1,5 +1,6 @@
 <Solution>
   <Project Path="ProyectoFinal.API/ProyectoFinal.API.csproj" Id="1f83ee5c-b440-4f2a-93e3-8be753b4ba90" />
+  <Project Path="ProyectoFinal.ConsoleClient/ProyectoFinal.ConsoleClient.csproj" Id="b073acb5-9be4-43b8-9cd1-fdf9745732e8" />
   <Project Path="ProyectoFinal.Domain/ProyectoFinal.Domain.csproj" />
   <Project Path="ProyectoFinal.MCP.Client/ProyectoFinal.MCP.Client.csproj" Id="1bcff798-8682-4a14-abc8-c7be358aa4cd" />
   <Project Path="ProyectoFinal.MCP.Server/ProyectoFinal.MCP.Server.csproj" Id="f054ffdd-ef48-4dfb-8256-82f548c78939" />
