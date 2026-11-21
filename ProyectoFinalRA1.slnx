@@ -5,4 +5,5 @@
   <Project Path="ProyectoFinal.MCP.Client/ProyectoFinal.MCP.Client.csproj" Id="1bcff798-8682-4a14-abc8-c7be358aa4cd" />
   <Project Path="ProyectoFinal.MCP.Server/ProyectoFinal.MCP.Server.csproj" Id="f054ffdd-ef48-4dfb-8256-82f548c78939" />
   <Project Path="ProyectoFinal.Persistence/ProyectoFinal.Persistence.csproj" Id="b994c8e5-034f-4c9a-8577-b877cbb4ae69" />
+  <Project Path="ProyectoFinal.WPFClient/ProyectoFinal.WPFClient.csproj" Id="54bd78a2-014e-4378-83eb-2469ba238788" />
 </Solution>

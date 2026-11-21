@@ -81,8 +81,14 @@ public static class VehiculoTools
 
         // 4. Si hay resultados, devolvemos un resumen con los modelos.
         //    Usamos string.Join para unir los modelos en una sola frase.
-        return $"He encontrado {filtrados.Count} vehículos de la marca '{brand}': "
-               + string.Join(", ", filtrados.Select(v => v.Modelo));
+        //return $"He encontrado {filtrados.Count} vehículos de la marca '{brand}': "
+        //       + string.Join(", ", filtrados.Select(v => v.Modelo));
+        // 4. Devolvemos solo los primeros 10 modelos para no saturar
+        // Ej. si hay 2000 Tatas, te dirá: "He encontrado 2017 vehículos... Algunos modelos son: Tiago, Nexon, Altroz..."
+        var modelosUnicos = filtrados.Select(v => v.Modelo).Distinct().Take(10);
+        return $"He encontrado {filtrados.Count} vehículos de la marca '{brand}'. Algunos modelos son: "
+               + string.Join(", ", modelosUnicos);
+
     }
 
     // -----------------------------------------------------------------------------
