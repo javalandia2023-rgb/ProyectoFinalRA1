@@ -1,11 +1,14 @@
-using ProyectoFinal.API.Converters;
+using Microting.EntityFrameworkCore.MySql; // <-- AÑADE ESTA LÍNEA
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using ProyectoFinal.API.Converters;
 using ProyectoFinal.Domain.Interfaces;
-using ProyectoFinal.Persistence.Repositories;
+using ProyectoFinal.Persistence.Contexts;
 using ProyectoFinal.Persistence.Importers;
+using ProyectoFinal.Persistence.Repositories;
 using System.Text;
-
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,15 +44,28 @@ builder.Services.AddSwaggerGen(options =>
 
 
 // 1. Inyección de Dependencias (Open/Closed)
+// Configuración de la persistencia (OCP)
 var persistenceMode = builder.Configuration["PersistenceMode"];
+
 if (persistenceMode == "Memory")
 {
     builder.Services.AddSingleton<IVehiculoRepository, InMemoryVehiculoRepository>();
+}
+else if (persistenceMode == "MySQL")
+{
+    // Registramos el DbContext con la cadena de conexión
+    var connectionString = builder.Configuration.GetConnectionString("MySqlConnection");
+    builder.Services.AddDbContext<AppDbContext>(options =>
+        options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+
+    // Registramos el repositorio de EF Core
+    builder.Services.AddScoped<IVehiculoRepository, EfVehiculoRepository>();
 }
 else
 {
     throw new NotImplementedException("Modo de persistencia no implementado aún.");
 }
+
 
 builder.Services.AddTransient<IDataImporter, VehicleSpecificationImporter>();
 
@@ -71,6 +87,14 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 
 var app = builder.Build();
+
+// Aplicar migraciones automáticamente al arrancar (solo si usamos MySQL)
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    dbContext.Database.Migrate(); // Esto crea las tablas si no existen
+}
+
 
 if (app.Environment.IsDevelopment())
 {
