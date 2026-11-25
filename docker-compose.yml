@@ -9,7 +9,7 @@ services:
       MYSQL_DATABASE: ProyectoFinalDB
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
     healthcheck:
@@ -24,7 +24,7 @@ services:
     container_name: proyecto-final-api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__MySqlConnection=Server=mysql-db;Database=ProyectoFinalDB;User=root;Password=root;AllowUserVariables=True;UseAffectedRows=False;DefaultCommandTimeout=300;
+      - ConnectionStrings__MySqlConnection=Server=mysql-db;Port=3306;Database=ProyectoFinalDB;User=root;Password=root;AllowUserVariables=True;UseAffectedRows=False;DefaultCommandTimeout=300;
       - PersistenceMode=MySQL
     ports:
       - "5168:8080"

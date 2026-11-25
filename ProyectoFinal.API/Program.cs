@@ -56,7 +56,9 @@ else if (persistenceMode == "MySQL")
     // Registramos el DbContext con la cadena de conexión
     var connectionString = builder.Configuration.GetConnectionString("MySqlConnection");
     builder.Services.AddDbContext<AppDbContext>(options =>
-        options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+        //options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+        options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 46))));
+
 
     // Registramos el repositorio de EF Core
     builder.Services.AddScoped<IVehiculoRepository, EfVehiculoRepository>();
