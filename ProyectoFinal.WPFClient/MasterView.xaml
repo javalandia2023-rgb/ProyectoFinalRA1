@@ -21,9 +21,40 @@
             <Button Content="Nuevo Vehículo" Width="120" Height="30" Margin="10,0,0,0" Click="BtnNuevo_Click"/>
         </StackPanel>
 
-        <!-- El DataGrid ahora usa ItemsSource con Binding -->
-        <DataGrid Grid.Row="1" AutoGenerateColumns="True" IsReadOnly="True" 
-                  ItemsSource="{Binding Vehiculos}"/>
+        <!-- 
+        DataGrid con columnas personalizadas.
+        Se ha cambiado AutoGenerateColumns a "False" para controlar manualmente las columnas.
+        Se añade una columna de tipo "DataGridTemplateColumn" que contiene dos botones (Editar y Eliminar).
+        Cada botón está enlazado a un comando del ViewModel (EditarCommand y EliminarCommand) mediante Binding.
+        El parámetro "CommandParameter={Binding}" pasa el objeto Vehiculo completo al comando, 
+        permitiendo saber qué fila se está editando o eliminando.
+        -->
+        <DataGrid Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" 
+                  ItemsSource="{Binding Vehiculos}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                <DataGridTextColumn Header="Marca" Binding="{Binding Marca}" Width="100"/>
+                <DataGridTextColumn Header="Modelo" Binding="{Binding Modelo}" Width="120"/>
+                <DataGridTextColumn Header="Año" Binding="{Binding Año}" Width="60"/>
+                <DataGridTextColumn Header="Precio" Binding="{Binding Precio}" Width="80"/>
+                <DataGridTextColumn Header="Combustible" Binding="{Binding TipoCombustible}" Width="100"/>
+
+                <DataGridTemplateColumn Header="Acciones" Width="150">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="Editar" Width="60" Margin="2" 
+                                        Command="{Binding DataContext.EditarCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                        CommandParameter="{Binding}" />
+                                <Button Content="Eliminar" Width="60" Margin="2" 
+                                        Command="{Binding DataContext.EliminarCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                        CommandParameter="{Binding}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
     </Grid>
 </UserControl>
-
